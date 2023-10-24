@@ -1,13 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import HomePage from '../components/Home';
-import ProductPage from '../components/Products';
+import HomePage from '../pages/Home';
+import ProductPage from '../pages/Products';
+import RootLayout from '../pages/RootLayout';
 
 // Create router as JS object, this will latest which work React version > 6.4
 const router = createBrowserRouter(
     [
-      {path: '', element: <HomePage/>}, //define as jsx element or compnent name
-      {path: '/product', Component: ProductPage},
+      {path: '', element: <RootLayout/>, 
+      children: [
+        {path: '', element: <HomePage/>}, //define as jsx element or compnent name
+        {path: '/product', Component: ProductPage},
+      ]},
+      
     ]
 );
 
