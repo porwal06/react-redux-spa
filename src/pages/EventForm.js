@@ -1,10 +1,18 @@
-import { Form } from "react-router-dom";
-function EventForm(){
+import { Form, useNavigation, useNavigate } from "react-router-dom";
+function EventForm(props){
+    const navigate = useNavigate();
+    const cancelHandler = () => {
+        navigate('..');
+    }
+    const navigation = useNavigation();
+    const isSubmitting = (navigation.state === 'submitting');
+
     return <Form method="post"> 
-    <input type="text" placeholder="Event Name" name="name"/>
-    <input type="id" placeholder="Event id" name="id"/>
-    <textarea name="desc"/>
-    <button type="submit">Submit</button>
+    <input type="text" placeholder="Event Name" name="name" defaultValue={props.event ? props.event.name : ''}/>
+    <input type="id" placeholder="Event id" name="id" defaultValue={props?.event ? props.event.id : ''}/>
+    <textarea name="desc" defaultValue={props?.event ? props.event.desc : ''}/>
+    <button type="submit" disabled={isSubmitting}>{isSubmitting ? "Submitting..." : "Submit"}</button>
+    <button type="button" onClick={cancelHandler}>Cancel</button>
 </Form>;
 }
 

@@ -30,10 +30,11 @@ function EventPage() {
                 <p>Id: {eventInfo.eventid}</p>
                 <p>Name: {eventInfo.name}</p>
                 <p>Desc: {eventInfo.desc}</p>
-                <p>
+                <div>
                     <Link to={`/events/${eventInfo.id}/edit`}>Edit</Link>
+                    <Link to={`/events/${eventInfo.id}`}>Detail</Link>
                     <button onClick={event => DeleteEventHandler(event, eventInfo.id)}>Delete</button>
-                </p>
+                </div>
             </li>
         })}
         </ul>

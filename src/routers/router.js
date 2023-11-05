@@ -6,7 +6,7 @@ import RootLayout from '../pages/RootLayout';
 import ErrorPage from '../pages/Error';
 import ProductDetailPage from '../pages/ProductDetail';
 import EventPage, {deleteAction, eventLoader}  from '../pages/Event';
-import EventDetailPage from '../pages/EventDetail';
+import EventDetailPage, {singleEventLoader} from '../pages/EventDetail';
 import EventNewPage, {addEventAction} from '../pages/EventNew';
 import EventEditPage from '../pages/EventEdit';
 import RootEventLayout from '../pages/RootEventLayout';
@@ -22,8 +22,15 @@ const router = createBrowserRouter(
         {path: 'events', element: <RootEventLayout/>,
         children:[
           {index:true, element: <EventPage/>, loader: eventLoader, action: deleteAction},
-          {path: ':eventId', element: <EventDetailPage/>},
-          {path: ':eventId/edit', element: <EventEditPage/>},
+          {path: ':eventId',
+          id: 'event-detail', //This id will help to use same loader in detail & edit page
+          loader: singleEventLoader,
+          children:[
+            {index: true, element: <EventDetailPage/>,},
+            {path: 'edit', element: <EventEditPage/>, action: addEventAction},
+          ]        
+        },         
+          
           {path: 'new', element: <EventNewPage/>, action: addEventAction},
         ] }
       ]},
