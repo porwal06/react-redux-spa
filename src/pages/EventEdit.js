@@ -6,7 +6,7 @@ function EventEditPage() {
     console.log(data);
     return <>
     <h1> Event Edit page</h1>
-    <EventForm event={data}/>
+    <EventForm event={data} method="patch"/>
     </>
 
 }
